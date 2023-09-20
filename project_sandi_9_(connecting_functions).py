@@ -1,5 +1,4 @@
 # Section 0
-"""
 
 import pandas as pd
 output_list = []
