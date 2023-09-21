@@ -16,15 +16,18 @@ def main_st():
     # Input teks dari pengguna
     synop_code = st.text_area("Masukkan sandi synop", height=100)
 
-    # Tombol untuk memproses data
+    # process button
     if st.button("Proses"):
-        # Memeriksa apakah input kosong atau hanya mengandung spasi
+        # none input
         if not synop_code.strip():
             st.error("Masukkan input sandi synop yang valid")
         else:
             # 00UTC
             if selected_hour == "00.00":
-                df_seksi_0, df_seksi_1, df_seksi_3 = main_00UTC(synop_code)
+                try:
+                    df_seksi_0, df_seksi_1, df_seksi_3 = main_00UTC(synop_code)
+                except ValueError:
+                    st.error("Masukkan sandi synop yang valid")
             # elif selected_hour == "01.00":
             #     df = main_01UTC(synop_code)
             # elif selected_hour == "02.00":
