@@ -1262,7 +1262,7 @@ def main():
     selected_hour = st.selectbox("Pilih Jam", ["--Pilih Jam--", "00.00", "01.00", "02.00"])  # Tambahkan jam-jam lain yang diinginkan
 
     # Input teks dari pengguna
-    synop_code = st.text_area("Masukkan sandi synop", height=200)
+    synop_code = st.text_area("Masukkan sandi synop", height=100)
 
     # Tombol untuk memproses data
     if st.button("Proses"):
