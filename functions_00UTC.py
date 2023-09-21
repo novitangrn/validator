@@ -288,7 +288,8 @@ def section_3_00UTC(functions, parts):
         for i, val in enumerate(reversed(cs3)):
             outputs.insert(-(i+2), val)
     else:
-        pass
+        #pass
+        outputs.insert(-(i+2), "")
 
     # Menambahkan validasi untuk fungsi wajib yang belum dijalankan
     for function in required_func:
