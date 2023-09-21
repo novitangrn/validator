@@ -285,10 +285,12 @@ def section_3_00UTC(functions, parts):
 
     if unprocessed_parts:
         cs3 = cloud_section3(unprocessed_parts)
-        for i, val in enumerate(reversed(cs3)):
-            outputs.insert(-(i+2), val)
+        if cs3 is not None:
+            for i, val in enumerate(reversed(cs3)):
+                outputs.insert(-(i+2), val)
+        else:
+            outputs.insert(-(i+2), "")
     else:
-        #pass
         outputs.insert(-(i+2), "")
 
     # Menambahkan validasi untuk fungsi wajib yang belum dijalankan
@@ -303,16 +305,11 @@ def section_3_00UTC(functions, parts):
                 outputs.append(str(e))
 
     outputs = list(filter(lambda x: x is not None, outputs))
-
     return outputs
-
-
 
 def create_dataframe(output):
     df = pd.DataFrame(output, columns=['Nama Fungsi', 'Input', 'Output'])
     return df
-
-
 
 def main_00UTC(synop_code):
 
