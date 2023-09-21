@@ -1256,13 +1256,13 @@ def main_00UTC(synop_code):
 
 def main():
     st.title("Validator Synop Sederhana")
-    st.image('login2.png',use_column_width=True)
+    #st.image('login2.png',use_column_width=True)
     
     # Dropdown untuk memilih jam
     selected_hour = st.selectbox("Pilih Jam", ["--Pilih Jam--", "00.00", "01.00", "02.00"])  # Tambahkan jam-jam lain yang diinginkan
 
     # Input teks dari pengguna
-    synop_code = st.text_input("Masukkan sandi synop")
+    synop_code = st.text_input("Masukkan sandi synop", max_chars=100, max_width=500)
 
     # Tombol untuk memproses data
     if st.button("Proses"):
