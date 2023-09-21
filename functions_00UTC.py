@@ -5,11 +5,15 @@ def input_sandi(parts):
     section1_list = []
     section2_list = []
     section3_list = []
-    index_1 = parts.index('96935') # Mencari indeks sandi pertama '96935'
-    index_2 = parts.index('333') # Mencari indeks sandi kedua '333'
-    section1_list = parts[:index_1+1] # Memasukkan bagian pertama ke first_list
-    section2_list = parts[index_1 + 1:index_2] # Memasukkan bagian kedua ke second_list
-    section3_list = parts[index_2:] # Memasukkan bagian ketiga ke third_list
+    try:
+        index_1 = parts.index('96935')  # Mencari indeks sandi pertama '96935'
+        index_2 = parts.index('333')  # Mencari indeks sandi kedua '333'
+    except ValueError:
+        raise ValueError("Masukkan input sandi synop yang valid")
+
+    section1_list = parts[:index_1+1] 
+    section2_list = parts[index_1 + 1:index_2]  
+    section3_list = parts[index_2:]  
 
     return section1_list, section2_list, section3_list
 
