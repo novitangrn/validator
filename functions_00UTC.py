@@ -1,3 +1,4 @@
+from synop_functions import *
 import pandas as pd
 
 def input_sandi(parts):
@@ -11,8 +12,6 @@ def input_sandi(parts):
     section3_list = parts[index_2:] # Memasukkan bagian ketiga ke third_list
 
     return section1_list, section2_list, section3_list
-
-
 
 def section_0(functions, parts):
     outputs = []
