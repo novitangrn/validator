@@ -285,13 +285,14 @@ def section_3_00UTC(functions, parts):
 
     if unprocessed_parts:
         cs3 = cloud_section3(unprocessed_parts)
+        i = 0
         if cs3 is not None:
             for i, val in enumerate(reversed(cs3)):
                 outputs.insert(-(i+2), val)
         else:
             outputs.insert(-(i+2), "")
     else:
-        outputs.insert(-(i+2), "")
+        pass
 
     # Menambahkan validasi untuk fungsi wajib yang belum dijalankan
     for function in required_func:
