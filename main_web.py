@@ -53,4 +53,4 @@ def highlight_df(df):
     return df.style.apply(highlight, axis=1)
 
 if __name__ == '__main__':
-    main()
+    main_str()
