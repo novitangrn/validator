@@ -283,15 +283,15 @@ def section_3_00UTC(functions, parts):
     for section in parts:
         outputs.append(output_mapping[section])
 
+    i = 0
     if unprocessed_parts:
         cs3 = cloud_section3(unprocessed_parts)
-        i = 0
         if cs3 is not None:
             for i, val in enumerate(reversed(cs3)):
                 outputs.insert(-(i+2), val)
-        else:
-            outputs.insert(-(i+2), "")
     else:
+        cs3 = None
+    if cs3 is None:
         pass
 
     # Menambahkan validasi untuk fungsi wajib yang belum dijalankan
