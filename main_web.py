@@ -18,19 +18,19 @@ def main_st():
 
     # Tombol untuk memproses data
     if st.button("Proses"):
-        # Menjalankan fungsi sesuai pilihan jam
-        if selected_hour == "00.00":
-            df_seksi_0, df_seksi_1, df_seksi_3 = main_00UTC(synop_code)
-        #elif selected_hour == "01.00":
-            #df = main_01UTC(synop_code)
-        #elif selected_hour == "02.00":
-            #df = main_02UTC(synop_code)
+        # Memeriksa apakah input kosong atau hanya mengandung spasi
+        if not synop_code.strip():
+            st.error("Masukkan input sandi synop yang valid")
         else:
-            st.error("Jam yang dipilih tidak valid")
-
-            # Menampilkan DataFrame jika ada
-        #if 'df' in locals():
-            #st.dataframe(df, height=1100, width=2000)
+            # 00UTC
+            if selected_hour == "00.00":
+                df_seksi_0, df_seksi_1, df_seksi_3 = main_00UTC(synop_code)
+            # elif selected_hour == "01.00":
+            #     df = main_01UTC(synop_code)
+            # elif selected_hour == "02.00":
+            #     df = main_02UTC(synop_code)
+            else:
+                st.error("Jam yang dipilih tidak valid")
 
         # Menampilkan DataFrame jika ada
         if 'df_seksi_0' in locals():
