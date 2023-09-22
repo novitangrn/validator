@@ -76,8 +76,6 @@ def section_0(functions, parts):
 
     return outputs
 
-
-
 def section_1_00UTC(functions, parts):
     outputs = []
     function1_left = functions.copy()
@@ -154,75 +152,6 @@ def section_1_00UTC(functions, parts):
                 outputs.insert(index, output)
             except Exception as e:
                 outputs.append(str(e))
-
-    return outputs
-
-
-
-def section_3_00UTC(functions, parts):
-    # section 3 with 1 digit key
-    function_mapping_seksi3 = {
-        '3': seksi_3,
-        '1': max_temp,
-        '2': min_temp,
-        '5': evaporation,
-        '6': rain_3hours,
-        #'8': cloud_1
-    }
-    # section 3 with 2 digit key
-    additional_function_mapping = {
-        '55': sun_radiation,
-        '56': cloud_direction,
-        '57': convective_clouds,
-        '58': pressure_changes,
-        '80': convective_1
-    }
-
-    processed_functions = set()
-    unprocessed_parts = parts[:]  # Menyimpan semua bagian yang belum diproses
-    outputs = []
-
-    output_mapping = {}  # Menyimpan output fungsi sesuai dengan urutan section_3
-    for section in parts:
-        output_mapping[section] = None
-
-    # Fungsi-fungsi dari function_mapping_seksi3
-    for part in unprocessed_parts[:]:
-        try:
-            if part[0] in function_mapping_seksi3:
-                function = function_mapping_seksi3[part[0]]
-                if function not in processed_functions:
-                    output = function(part)
-                    output_mapping[part] = output
-                    processed_functions.add(function)
-                    unprocessed_parts.remove(part)
-        except Exception as e:
-            outputs.append(str(e))
-            unprocessed_parts.remove(part)
-
-    # Fungsi-fungsi dari additional_function_mapping
-    for part in unprocessed_parts[:]:
-        try:
-            if part[:2] in additional_function_mapping:
-                function = additional_function_mapping[part[:2]]
-                if function not in processed_functions:
-                    output = function(part)
-                    output_mapping[part] = output
-                    processed_functions.add(function)
-                    unprocessed_parts.remove(part)
-        except Exception as e:
-            outputs.append(str(e))
-            unprocessed_parts.remove(part)
-
-    # Menambahkan output fungsi ke outputs sesuai dengan urutan section_3
-    for section in parts:
-        outputs.append(output_mapping[section])
-
-    cs3 = cloud_section3(unprocessed_parts)
-    for i, val in enumerate(cs3):
-        outputs.insert(-(i+2), val)
-
-    outputs = list(filter(lambda x: x is not None, outputs))
 
     return outputs
 
