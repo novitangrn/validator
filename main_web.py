@@ -53,6 +53,15 @@ def main_st():
             st.markdown("<h2>Seksi 3</h2>", unsafe_allow_html=True)
             st.dataframe(highlight_df(df_seksi_3), height=500, width=700)
 
+        # Memeriksa apakah semua kolom 'Output' pada DataFrame tidak berisi pesan apapun
+        if 'df_seksi_0' in locals() and 'df_seksi_1' in locals() and 'df_seksi_3' in locals():
+            if (df_seksi_0['Output'].astype(bool).sum() == 0 and
+                df_seksi_1['Output'].astype(bool).sum() == 0 and
+                df_seksi_3['Output'].astype(bool).sum() == 0):
+                st.success("Sandi synop sudah benar.")
+            else:
+                st.warning("Sandi synop masih mengandung kesalahan.")
+
 def highlight_df(df):
     def highlight(row):
         # Menggunakan warna kuning untuk baris dengan nilai pada kolom output
