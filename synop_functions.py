@@ -874,7 +874,7 @@ def convective_1(convective_3_val):
 
     if len(convective_3_val) == 5:
         convective_3_code = convective_3_val[0:2]  # Kode pengenal sandi awan konvektif seksi 3
-        C = int(convective_3_val[2])  # C: Jenis Awan (sandi: 0-9)
+        C = convective_3_val[2]  # C: Jenis Awan (sandi: 0-9)
         hs = int(convective_3_val[3:])  # hs: Tinggi awan
 
         # Cek kesesuaian karakter
