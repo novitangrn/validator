@@ -243,7 +243,8 @@ def section_3_00UTC(functions, parts):
 
 def create_dataframe(output):
     df = pd.DataFrame(output, columns=['Nama Fungsi', 'Input', 'Output'])
-    return df
+    df_styled = df.style.set_column_width(['Nama Fungsi', 'Input', 'Output'], width=20)
+    return df_styled
 
 def main_00UTC(synop_code):
 
