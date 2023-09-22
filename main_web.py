@@ -55,12 +55,14 @@ def main_st():
 
         # Memeriksa apakah semua kolom 'Output' pada DataFrame tidak berisi pesan apapun
         if 'df_seksi_0' in locals() and 'df_seksi_1' in locals() and 'df_seksi_3' in locals():
-            if (df_seksi_0['Output'].astype(bool).sum() == 0 and
+            if (df_seksi_0['Output'].astypebool).sum() == 0 and
                 df_seksi_1['Output'].astype(bool).sum() == 0 and
                 df_seksi_3['Output'].astype(bool).sum() == 0):
-                st.success("Sandi synop sudah benar.")
+                st.success("Sandi synop sudah benar")
+                st.markdown("<br>", unsafe_allow_html=True)  # Menambahkan baris kosong setelah pesan
             else:
-                st.warning("Sandi synop masih mengandung kesalahan.")
+                st.warning("Sandi synop mengandung kesalahan")
+                st.markdown("<br>", unsafe_allow_html=True)  # Menambahkan baris kosong setelah pesa
 
 def highlight_df(df):
     def highlight(row):
