@@ -242,9 +242,9 @@ def section_3_00UTC(functions, parts):
     return outputs
 
 def create_dataframe(output):
+    pd.set_option('display.max_colwidth', None)
     df = pd.DataFrame(output, columns=['Nama Fungsi', 'Input', 'Output'])
-    df_styled = df.style.set_column_width(['Nama Fungsi', 'Input', 'Output'], width=20)
-    return df_styled
+    return df
 
 def main_00UTC(synop_code):
 
