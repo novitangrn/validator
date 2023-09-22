@@ -3,7 +3,7 @@ from functions_00UTC import *
 
 import streamlit as st
 import pandas as pd
-
+import re
 
 def main_st():
     img = st.image('login2.png', width=120)
@@ -15,7 +15,7 @@ def main_st():
 
     # Input teks dari pengguna
     synop_code = st.text_area("Masukkan sandi synop", height=100)
-
+   
     # process button
     if st.button("Proses"):
         # None input
@@ -26,7 +26,8 @@ def main_st():
             if selected_hour == "00.00":
                 try:
                     # Memeriksa apakah part terakhir dari keseluruhan sandi mengandung tanda "="
-                    if synop_code.endswith('='):
+                    pattern = r'=+$'  # Pola ekspresi reguler untuk mencocokkan tanda "=" di akhir teks
+                    if re.search(pattern, synop_code):
                         df_seksi_0, df_seksi_1, df_seksi_3 = main_00UTC(synop_code)
                     else:
                         st.warning("Part terakhir dari sandi synop tidak memiliki tanda '='")
