@@ -30,6 +30,7 @@ def main_st():
                         df_seksi_0, df_seksi_1, df_seksi_3 = main_00UTC(synop_code)
                     else:
                         st.warning("Part terakhir dari sandi synop tidak memiliki tanda '='")
+                        df_seksi_0, df_seksi_1, df_seksi_3 = main_00UTC(synop_code)
                 except ValueError:
                     st.error("Masukkan sandi synop yang valid")
             # elif selected_hour == "01.00":
