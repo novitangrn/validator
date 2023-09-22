@@ -6,7 +6,8 @@ import pandas as pd
 import re
 
 def main_st():
-    img = st.image('login2.png', width=120)
+    st.set_page_config(layout="wide")
+    img = st.image('login.png', width=180)
     st.title("Validator Synop Sederhana")
     #st.image('login2.png',use_column_width=True)
     
