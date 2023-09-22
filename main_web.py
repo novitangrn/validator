@@ -55,7 +55,7 @@ def main_st():
 
         # Memeriksa apakah semua kolom 'Output' pada DataFrame tidak berisi pesan apapun
         if 'df_seksi_0' in locals() and 'df_seksi_1' in locals() and 'df_seksi_3' in locals():
-            if (df_seksi_0['Output'].astypebool).sum() == 0 and
+            if (df_seksi_0['Output'].astype(bool).sum() == 0 and
                 df_seksi_1['Output'].astype(bool).sum() == 0 and
                 df_seksi_3['Output'].astype(bool).sum() == 0):
                 st.success("Sandi synop sudah benar")
