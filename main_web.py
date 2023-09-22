@@ -18,14 +18,18 @@ def main_st():
 
     # process button
     if st.button("Proses"):
-        # none input
+        # None input
         if not synop_code.strip():
             st.error("Masukkan input sandi synop yang valid")
         else:
             # 00UTC
             if selected_hour == "00.00":
                 try:
-                    df_seksi_0, df_seksi_1, df_seksi_3 = main_00UTC(synop_code)
+                    # Memeriksa apakah part terakhir dari keseluruhan sandi mengandung tanda "="
+                    if synop_code.endswith('='):
+                        df_seksi_0, df_seksi_1, df_seksi_3 = main_00UTC(synop_code)
+                    else:
+                        st.warning("Part terakhir dari sandi synop tidak memiliki tanda '='")
                 except ValueError:
                     st.error("Masukkan sandi synop yang valid")
             # elif selected_hour == "01.00":
