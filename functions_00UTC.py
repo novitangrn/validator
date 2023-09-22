@@ -242,7 +242,7 @@ def section_3_00UTC(functions, parts):
     return outputs
 
 def create_dataframe(output):
-    pd.set_option('display.max_colwidth', None)
+    pd.set_option('display.max_colwidth', 500)
     df = pd.DataFrame(output, columns=['Nama Fungsi', 'Input', 'Output'])
     return df
 
