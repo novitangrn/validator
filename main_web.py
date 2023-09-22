@@ -42,6 +42,17 @@ def main_st():
             else:
                 st.error("Jam yang dipilih tidak valid")
 
+        # Memeriksa apakah semua kolom 'Output' pada DataFrame tidak berisi pesan apapun
+        if 'df_seksi_0' in locals() and 'df_seksi_1' in locals() and 'df_seksi_3' in locals():
+            if (df_seksi_0['Output'].astype(bool).sum() == 0 and
+                df_seksi_1['Output'].astype(bool).sum() == 0 and
+                df_seksi_3['Output'].astype(bool).sum() == 0):
+                st.success("Sandi synop sudah benar")
+                st.markdown("<br>", unsafe_allow_html=True)  # Menambahkan baris kosong setelah pesan
+            else:
+                st.warning("Sandi synop mengandung kesalahan")
+                st.markdown("<br>", unsafe_allow_html=True)  # Menambahkan baris kosong setelah pesa
+        
         # Menampilkan DataFrame jika ada
         if 'df_seksi_0' in locals():
             st.markdown("<h2>Seksi 0</h2>", unsafe_allow_html=True)
@@ -53,16 +64,6 @@ def main_st():
             st.markdown("<h2>Seksi 3</h2>", unsafe_allow_html=True)
             st.dataframe(highlight_df(df_seksi_3), height=500, width=700)
 
-        # Memeriksa apakah semua kolom 'Output' pada DataFrame tidak berisi pesan apapun
-        if 'df_seksi_0' in locals() and 'df_seksi_1' in locals() and 'df_seksi_3' in locals():
-            if (df_seksi_0['Output'].astype(bool).sum() == 0 and
-                df_seksi_1['Output'].astype(bool).sum() == 0 and
-                df_seksi_3['Output'].astype(bool).sum() == 0):
-                st.success("Sandi synop sudah benar")
-                st.markdown("<br>", unsafe_allow_html=True)  # Menambahkan baris kosong setelah pesan
-            else:
-                st.warning("Sandi synop mengandung kesalahan")
-                st.markdown("<br>", unsafe_allow_html=True)  # Menambahkan baris kosong setelah pesa
 
 def highlight_df(df):
     def highlight(row):
