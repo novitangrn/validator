@@ -27,7 +27,7 @@ def main_st():
             if selected_hour == "00.00":
                 try:
                     # Memeriksa apakah part terakhir dari keseluruhan sandi mengandung tanda "="
-                    pattern = r'=+$'  # Pola ekspresi reguler untuk mencocokkan tanda "=" di akhir teks
+                    pattern = r'=\s*$'  # Pola ekspresi reguler untuk mencocokkan tanda "=" di akhir teks
                     if re.search(pattern, synop_code):
                         df_seksi_0, df_seksi_1, df_seksi_3 = main_00UTC(synop_code)
                     else:
