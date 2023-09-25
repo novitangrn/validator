@@ -696,7 +696,7 @@ def pressure_changes(pressure_changes_val):
     if len(pressure_changes_val) == 6:
         pressure_changes_code = pressure_changes_val[0:2]
         P = int(pressure_changes_val[2:4])
-        eq_sign = pressure_changes_val[5])
+        eq_sign = pressure_changes_val[5]
         # Cek kesesuaian karakter
         if not pressure_changes_code in ["58", "59"]:
             error_messages.append(f"Sandi perbedaan tekanan tidak sesuai. Masukkan nilai 58 atau 59. Input: '{pressure_changes_code}'")
