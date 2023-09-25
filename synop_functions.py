@@ -1,64 +1,74 @@
+# SMID53
 def heading1(head):
     head = str(head)
     if len(head) == 6:
       if head == "SMID53":
-        return ["Heading", head, ""]
+        return ["Heading Sandi", head, ""]
       else:
-        return ["Heading", head, "Heading sandi tidak sesuai. Masukkan 'SMID53'"]
+        return ["Heading Sandi", head, "Heading sandi tidak sesuai. Masukkan 'SMID53'"]
     else:
-      return ["Heading", head, "Masukkan kode 6 karakter"]
+      return ["Heading Sandi", head, "Masukkan kode 6 karakter"]
 
+# SIID63
+def heading2(head):
+    head = str(head)
+    if len(head) == 6:
+      if head == "SIID63":
+        return ["Heading Sandi", head, ""]
+      else:
+        return ["Heading Sandi", head, "Heading sandi tidak sesuai. Masukkan 'SIID63'"]
+    else:
+      return ["Heading Sandi", head, "Masukkan kode 6 karakter"]
+
+# WARR
 def location(loc):
     loc = str(loc)
     if len(loc) == 4:
       if loc == "WARR":
-        return ["Sandi Lokasi", loc, ""]
+        return ["Heading Lokasi", loc, ""]
       else:
-        return ["Sandi Lokasi", loc, "Sandi lokasi tidak sesuai. Masukkan 'WARR'"]
+        return ["Heading Lokasi", loc, "Sandi lokasi tidak sesuai. Masukkan 'WARR'"]
     else:
-      return ["Sandi Lokasi", loc, "Masukkan kode 4 karakter"]
+      return ["Heading Lokasi", loc, "Masukkan kode 4 karakter"]
 
+# Penanggalan-Jam-Menit (DD-HH-MM)
 def time(times):
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
-
     if len(times) == 6:
         date = int(times[0:2])
         hour = int(times[2:4])
         minute = int(times[4:6])
-
         if not (0 <= date <= 31):
           error_messages.append(f"Bagian tanggal (date) di luar range 01-31.")
-        if not (0 <= hour <= 24):
+        if not (00 <= hour <= 24):
           error_messages.append(f"Bagian jam (hour) tidak sesuai.")
         if not (0 <= minute < 60):
           error_messages.append(f"Bagian menit (minute) tidak sesuai.")
-
     if not error_messages:
         if len(times) == 6:
-            return ["time", times, ""]
+            return ["Heading Waktu", times, ""]
         else:
             error_messages.append("Sandi tidak sesuai.")
+    return ["Heading Waktu", times, ", ".join(error_messages)]
 
-    return ["time", times, ", ".join(error_messages)]
-
+# Mi=Mi-Mj-Mj
 def synop(synop_sign):
     synop_sign = str(synop_sign)
     if len(synop_sign) == 4:
       if synop_sign == "AAXX":
-        return ["Synop", synop_sign, ""]
+        return ["Pengenal Berita Synop", synop_sign, ""]
       else:
-        return ["Synop", synop_sign, "Sandi synop tidak sesuai. Masukkan 'AAXX'"]
+        return ["Pengenal Berita Synop", synop_sign, "Pengenal berita synop tidak sesuai. Masukkan 'AAXX'"]
     else:
-      return ["Synop", synop_sign, "Masukkan kode 4 karakter"]
+      return ["Pengenal Berita Synop", synop_sign, "Masukkan kode 4 karakter (AAXX)"]
 
+# Y-Y-G-G-Iw
 def anemo_time(an_time):
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
-
     if len(str(an_time)) == 5:
         YY = int(an_time[0:2])
         GG = int(an_time[2:4])
         Iw = int(an_time[4])
-
         if not (0 <= YY <= 31):
             error_messages.append(f"Bagian tanggal (YY) tidak sesuai. (input: {YY})")
         if not (0 <= GG <= 24):
@@ -69,41 +79,28 @@ def anemo_time(an_time):
         error_messages.append(f"Panjang string tidak sesuai. Input: '{an_time}' (Panjang: {len(an_time)}), Panjang sandi harus 5 karakter")
 
     if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan nilai input
-        return ["anemo_time", an_time, ""]
+        return ["Waktu Pengamatan", an_time, ""]
 
-    return ["anemo_time", an_time, ", ".join(error_messages)]  # Kembalikan list output dengan pesan kesalahan dalam satu kolom
+    return ["Waktu Pengamatan", an_time, ", ".join(error_messages)]  # Kembalikan list output dengan pesan kesalahan dalam satu kolom
 
+# I-I-i-i-i
 def sandi_stamet(IIiii):
     IIiii = str(IIiii)
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
-    correct_sandi = '96935'
+    kode_stamet = "https://raw.githubusercontent.com/novitangrn/dataset/main/Kode%20Stasiun%20Indonesia.csv"
+    df_kode = pd.read_csv(kode_stamet, sep=';')
+    wmo_code = df_kode["WMO-Station ID"].astype(str).tolist()
 
     if len(IIiii) != 5:
-        error_messages.append(f"Panjang string tidak sesuai. Input: '{IIiii}' (Panjang: {len(IIiii)}), Panjang sandi harus 5 karakter")
-
-    if IIiii == correct_sandi:
-        return ["sandi_stamet", IIiii, ""]
-    else:
-        mismatch_indices = [i for i, (char_input, char_correct) in enumerate(zip(IIiii, correct_sandi)) if char_input != char_correct]
-
-        if mismatch_indices:
-            error_msg = "Sandi Juanda yang benar adalah: "
-            for i, char in enumerate(correct_sandi):
-                if i in mismatch_indices:
-                    error_msg += f"[{char}]"
-                else:
-                    error_msg += char
-            error_msg += f". (input: {IIiii})"
-            error_messages.append(error_msg)
-        else:
-            error_messages.append("Sandi Juanda yang benar adalah: 96935")
-
+        error_messages.append(f"Panjang sandi tidak sesuai. Panjang: {len(IIiii)}), panjang sandi harus 5 karakter")
+    elif IIiii not in wmo_code:
+        error_messages.append(f"Sandi '{IIiii}' tidak termasuk dalam sandi WMO.")
     if error_messages:
-        return ["sandi_stamet", IIiii, ", ".join(error_messages)]
+        return ["Sandi Stasiun WMO", IIiii, ", ".join(error_messages)]
 
-    return ["sandi_stamet", IIiii, "Sandi stamet tidak sesuai."]
+    return ["Sandi Stasiun WMO", IIiii, ""]
 
-
+# Ir-Ix-h-V-V
 def sandi_hujan(pengenal_hujan):
     pengenal_hujan = str(pengenal_hujan)
     error_messages = []
@@ -135,6 +132,7 @@ def sandi_hujan(pengenal_hujan):
 
     return ["Pengenal Hujan", pengenal_hujan, "Pengenal hujan tidak sesuai."]
 
+# N-d-d-f-f
 def wind(wind_code):
     wind_code = str(wind_code)
     error_messages = []
@@ -163,6 +161,7 @@ def wind(wind_code):
 
     return ["Pengenal Angin Seksi 1", wind_code, "Pengenal angin seksi 1 tidak sesuai."]
 
+# 00-fff
 def wind_2(wind_code):
     wind_code = str(wind_code)
     error_messages = []
@@ -218,7 +217,6 @@ def temp(temp_val):
     return ["Sandi Suhu", temp_val, "Pengenal hujan tidak sesuai."]
 
 # 2SnTTT or 29UUU
-
 def dew_point(dp_val):
     dp_val = str(dp_val)
     error_messages = []
@@ -261,8 +259,7 @@ def dew_point(dp_val):
 
     return ["Sandi Titik Embun", dp_val, "Sandi titik embun tidak sesuai."]
 
-# 3P0P0P0P0
-
+# 3-P0-P0-P0-P0
 def qfe(qfe_val):
     qfe_val = str(qfe_val)
     error_messages = []
@@ -289,7 +286,6 @@ def qfe(qfe_val):
     return ["Sandi QFE", qfe_val, "Sandi QFE tidak sesuai."]
 
 # 4PPPP
-
 def qff(qff_val):
     qff_val = str(qff_val)
     error_messages = []
@@ -328,12 +324,11 @@ def qff(qff_val):
             return ["Sandi QFF", int(qff_val), ""]
 
     if error_messages:
-        return ["sandi Tinggi Permukaan Bumi", qff_val, ", ".join(error_messages)]
+        return ["Sandi Tinggi Permukaan Bumi", qff_val, ", ".join(error_messages)]
 
     return ["Sandi QFF/sandi Tinggi Permukaan Bumi", qff_val, "Sandi QFF/sandi Tinggi Permukaan Bumi tidak sesuai."]
 
 # 4a3hhh
-
 def isobar(isobar_var):
     isobar_val = str(isobar_var)
     error_messages = []
@@ -359,6 +354,7 @@ def isobar(isobar_var):
 
     return ["Sandi Isobar", isobar_val, "Sandi Isobar tidak sesuai."]
 
+# 5appp
 def pressure(pres_val):
     pres_val = str(pres_val)
     error_messages = []
@@ -388,7 +384,6 @@ def pressure(pres_val):
     return ["Sandi Perubahan Tekanan Udara", pres_val, "Sandi Perubahan Tekanan Udara tidak sesuai."]
 
 # 6RRRtR
-
 def rain_24(rain_val):
     rain_val = str(rain_val)
     error_messages = []
@@ -417,8 +412,8 @@ def rain_24(rain_val):
 
     return ["Sandi Curah Hujan 24 Jam", rain_val, "Sandi Curah Hujan 24 Jam tidak sesuai."]
 
-#7-w-w-W1-W2
 
+#7-w-w-W1-W2
 def weather_con(weathercon_val):
     weathercon_val = str(weathercon_val)
     error_messages = []
@@ -450,8 +445,8 @@ def weather_con(weathercon_val):
 
     return ["Sandi Pengenal Cuaca", weathercon_val, "Sandi Pengenal Cuaca tidak sesuai."]
 
-#8-Nh-CL-CM-CH
 
+#8-Nh-CL-CM-CH
 def clouds(clouds_val):
     clouds_val = str(clouds_val)
     error_messages = []
@@ -479,21 +474,20 @@ def clouds(clouds_val):
             error_messages.append(f"Kode awan jenis CH tidak valid. Masukkan nilai antara 0-9. Input: '{CH}'")
 
         if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan nilai dalam bentuk list
-            return ["Sandi Awan", clouds_val, ""]
+            return ["Sandi Awan Seksi 1", clouds_val, ""]
 
     if error_messages:
-        return ["Sandi Awan", clouds_val, ", ".join(error_messages)]
+        return ["Sandi Awan Seksi 1", clouds_val, ", ".join(error_messages)]
 
-    return ["Sandi Awan", clouds_val, "Sandi Awan tidak sesuai."]
+    return ["Sandi Awan Seksi 1", clouds_val, "Sandi Awan tidak sesuai."]
 
 
+# 333
 def seksi_3(sec_val):
     expected_value = '333'
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
-
     if sec_val == expected_value:
-        return ["Section 3", sec_val, ""]
-
+        return ["Pengenal Seksi 3", sec_val, ""]
     else:
         # Cek panjang string
         if len(sec_val) != len(expected_value):
@@ -507,12 +501,11 @@ def seksi_3(sec_val):
                 error_messages.append(f"Kode pengenal sandi tidak sesuai. Input: '{sec_val}', Harusnya: '{expected_value}'")
 
         if error_messages:
-            return ["Section 3", sec_val, ", ".join(error_messages)]  # Menggabungkan pesan kesalahan menjadi satu string
+            return ["Pengenal Seksi 3", sec_val, ", ".join(error_messages)]  # Menggabungkan pesan kesalahan menjadi satu string
 
         return None
 
 # 00 UTC (2-Sn-Tn-Tn-Tn)
-
 def min_temp(mintemp_val):
     mintemp_val = str(mintemp_val)
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
@@ -528,23 +521,19 @@ def min_temp(mintemp_val):
         # Cek apakah karakter pertama adalah "2"
         if min_temp_code != "2":
             error_messages.append(f"Karakter pertama tidak sesuai. Input: '{min_temp_code}', Sandi pengenal: '2'")
-
         if Sn != "0":
             error_messages.append(f"Karakter kedua mungkin tidak sesuai. Input: '{Sn}', Harusnya: '0'")
-
         if not (0 <= Tn <= 499):  # Koreksi batasan angka suhu
             error_messages.append(f"Angka suhu mungkin tidak sesuai. Input: '{Tn}'")
-
         if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan nilai integer
-            return ["Min Temp", mintemp_val, ""]
+            return ["Suhu Minimum", mintemp_val, ""]
 
     if error_messages:
-        return ["Min Temp", mintemp_val, ", ".join(error_messages)]  # Menggabungkan pesan kesalahan menjadi satu string
+        return ["Suhu Minimum", mintemp_val, ", ".join(error_messages)]  # Menggabungkan pesan kesalahan menjadi satu string
 
-    return ["Min Temp", mintemp_val, "Suhu minimum tidak sesuai."]
+    return ["Suhu Minimum", mintemp_val, "Suhu minimum tidak sesuai."]
 
 # Only for 12.00 (1-Sn-Tx-Tx-Tx)
-
 def max_temp(maxtemp_val):
     maxtemp_val = str(maxtemp_val)
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
@@ -556,27 +545,22 @@ def max_temp(maxtemp_val):
         max_temp_code = maxtemp_val[0]
         Sn = maxtemp_val[1]
         Tx = int(maxtemp_val[2:])
-
         # Cek apakah karakter pertama adalah "1"
         if max_temp_code != "1":
             error_messages.append(f"Karakter pertama tidak sesuai. Input: '{max_temp_code}', Sandi pengenal: '1'")
-
         if Sn != "0":
             error_messages.append(f"Karakter kedua mungkin tidak sesuai. Input: '{Sn}', Harusnya: '0'")
-
         if not (0 <= Tx <= 499):  # Koreksi batasan angka suhu
             error_messages.append(f"Angka suhu mungkin tidak sesuai. Input: '{Tx}'")
-
         if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan nilai integer
-            return ["Suhu maksimum", maxtemp_val, ""]
+            return ["Suhu Maksimum", maxtemp_val, ""]
 
     if error_messages:
-        return ["Suhu maksimum", maxtemp_val, ", ".join(error_messages)]  # Kembalikan daftar pesan kesalahan
+        return ["Suhu Maksimum", maxtemp_val, ", ".join(error_messages)]  # Kembalikan daftar pesan kesalahan
 
-    return "Suhu maksimum tidak sesuai."
+    return ["Suhu Maksimum", maxtemp_val, "Suhu maksimum tidak sesuai."]
 
-# Only for 00.00
-
+# 5-E-E-E-Ie (00.00 UTC)
 def evaporation(vapor_val):
     vapor_val = str(vapor_val)
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
@@ -592,49 +576,43 @@ def evaporation(vapor_val):
         # Cek kesesuaian karakter
         if vapor_val_code != "5":
             error_messages.append(f"Karakter pertama tidak sesuai. Input: '{vapor_val_code}', Sandi pengenal: '5'")
-
         if not (0 <= E <= 999):  # Koreksi batasan angka suhu
             error_messages.append(f"Angka suhu mungkin tidak sesuai. Input: '{E}'")
-
         if Ie not in ["0", "1"]:
             error_messages.append(f"Pengenal panci penguapan mungkin tidak sesuai. Input: '{Ie}', Harusnya: '0' atau '1'")
-
         if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan nilai integer
-            return ["Evaporasi", vapor_val, ""]
+            return ["Sandi Evaporasi", vapor_val, ""]
 
     if error_messages:
-        return ["Evaporasi", vapor_val, ", ".join(error_messages)]  # Kembalikan daftar pesan kesalahan
+        return ["Sandi Evaporasi", vapor_val, ", ".join(error_messages)] # Kembalikan daftar pesan kesalahan
 
-    return "Sandi evaporasi tidak sesuai."
+    return ["Sandi Evaporasi", vapor_val, "Sandi evaporasi tidak sesuai."] 
 
-# Only 00.00 UTC
-
+# 55-SSS (Only 00.00 UTC)
 def sun_radiation(sunrad_val):
     sunrad_val = str(sunrad_val)
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
 
     if len(sunrad_val) != 5:
         error_messages.append(f"Panjang string tidak sesuai. Input: '{sunrad_val}' (Panjang: {len(sunrad_val)}), Panjang sandi harus 5 karakter")
-
     if len(sunrad_val) == 5:
         sunrad_val_code = sunrad_val[0:2]
         SSS = int(sunrad_val[2:])
-
         # Cek kesesuaian karakter
         if sunrad_val_code != "55":
             error_messages.append(f"Karakter pertama tidak sesuai. Input: '{sunrad_val_code}', Sandi pengenal: '55'")
-
         if not (0 <= SSS < 240):  # Koreksi batasan angka suhu
             error_messages.append(f"Angka suhu mungkin tidak sesuai, melebihi 24 jam. Input: '{SSS}'")
-
         if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan nilai integer
             return ["Radiasi Matahari", sunrad_val, ""]
 
     if error_messages:
         return ["Radiasi Matahari", sunrad_val, ", ". join(error_messages)]  # Kembalikan daftar pesan kesalahan
 
-    return "Sandi radiasi matahari tidak sesuai."
+    return ["Radiasi Matahari", sunrad_val, "Sandi radiasi matahari tidak sesuai."]
 
+
+# 56-Dm-Dl-Dh
 def cloud_direction(cloud_direction_val):
     cloud_direction_val = str(cloud_direction_val)
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
@@ -647,18 +625,15 @@ def cloud_direction(cloud_direction_val):
         Dl = int(cloud_direction_val[2])
         Dm = int(cloud_direction_val[3])
         Dh = int(cloud_direction_val[4])
-
         # Cek kesesuaian karakter
         if cloud_val_code != "56":
             error_messages.append(f"Karakter pertama tidak sesuai. Input: '{cloud_val_code}', Sandi pengenal: '56'")
-
         if not (0 <= Dl <= 8):
             error_messages.append(f"Sandi arah awan rendah mungkin tidak sesuai. Masukkan nilai antara 0-8. Input: '{Dl}'")
         if not (0 <= Dm <= 8):
             error_messages.append(f"Sandi arah awan menengah mungkin tidak sesuai. Masukkan nilai antara 0-8. Input: '{Dm}'")
         if not (0 <= Dh <= 8):
             error_messages.append(f"Sandi arah awan tinggi mungkin tidak sesuai. Masukkan nilai antara 0-8. Input: '{Dh}'")
-
         if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan nilai integer
             return ["Arah awan", cloud_direction_val, ""]
 
@@ -669,7 +644,6 @@ def cloud_direction(cloud_direction_val):
 
 # Grup ini dilaporkan hanya saat terdapat awan konvektif saja seperti Cumulus congestu atau towering Cumulus (sandi 2 atau 8), cumulunimbus (sandi 3 atau 9).
 # 57-C-D-e
-
 def convective_clouds(convective_clouds_val):
     convective_clouds_val = str(convective_clouds_val)
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
@@ -686,14 +660,12 @@ def convective_clouds(convective_clouds_val):
         # Cek kesesuaian karakter
         if cloud_val_code != "57":
             error_messages.append(f"Karakter pertama tidak sesuai. Input: '{cloud_val_code}', Sandi pengenal: '56'")
-
         if not C in [8, 9]:
             error_messages.append(f"Sandi awan tidak sesuai. Masukkan nilai 8 atau 9. Input: '{C}'")
         if not (0 <= Da <= 8):
             error_messages.append(f"Sandi arah awan konvektif tidak sesuai. Masukkan nilai antara 0-8. Input: '{Da}'")
         if not (0 <= ec <= 9):
             error_messages.append(f"Sandi sudut awan konvektif mungkin tidak sesuai. Masukkan nilai antara 0-9. Input: '{ec}'")
-
         if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan nilai integer
             return ["Awan konvektif.", convective_clouds_val, ""]
 
@@ -707,60 +679,86 @@ def pressure_changes(pressure_changes_val):
     pressure_changes_val = str(pressure_changes_val)
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
 
-    if len(pressure_changes_val) != 5:
+    if len(pressure_changes_val) != 5 and len(pressure_changes_val) != 5:
         error_messages.append(f"Panjang string tidak sesuai. Input: '{pressure_changes_val}' (Panjang: {len(pressure_changes_val)}), Panjang sandi harus 5 karakter")
 
     if len(pressure_changes_val) == 5:
         pressure_changes_code = pressure_changes_val[0:2]
         P = int(pressure_changes_val[2:])
-
         # Cek kesesuaian karakter
         if not pressure_changes_code in ["58", "59"]:
             error_messages.append(f"Sandi perbedaan tekanan tidak sesuai. Masukkan nilai 58 atau 59. Input: '{pressure_changes_code}'")
         if not (0 <= P <= P):
             error_messages.append(f"Sandi arah awan konvektif tidak sesuai. Masukkan nilai antara 0-8. Input: '{P}'")
-
         if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan nilai integer
-            return ["Perubahan Tekanan.", pressure_changes_val, ""]
+            return ["Perubahan Tekanan", pressure_changes_val, ""]
 
+    if len(pressure_changes_val) == 6:
+        pressure_changes_code = pressure_changes_val[0:2]
+        P = int(pressure_changes_val[2:4])
+        eq_sign = pressure_changes_val[5])
+        # Cek kesesuaian karakter
+        if not pressure_changes_code in ["58", "59"]:
+            error_messages.append(f"Sandi perbedaan tekanan tidak sesuai. Masukkan nilai 58 atau 59. Input: '{pressure_changes_code}'")
+        if not (0 <= P <= P):
+            error_messages.append(f"Sandi arah awan konvektif tidak sesuai. Masukkan nilai antara 0-8. Input: '{P}'")
+        if not (eq_sign == "="):
+            error_messages.append("Karakter terakhir sandi harus '='")
+        if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan nilai integer
+            return ["Perubahan Tekanan", pressure_changes_val, ""]
+    
     if error_messages:
-        return ["Perubahan Tekanan.", pressure_changes_val, ", ".join(error_messages)]  # Kembalikan daftar pesan kesalahan
-
+        return ["Perubahan Tekanan", pressure_changes_val, ", ".join(error_messages)]  # Kembalikan daftar pesan kesalahan
     return "Sandi perubahan tekanan tidak sesuai."
 
+# 6-RRR-tR
 def rain_3hours(rain_3hours_val):
     rain_3hours_val = str(rain_3hours_val)
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
 
-    if len(rain_3hours_val) != 5:
+    if len(rain_3hours_val) != 5 and len(rain_3hours_val) != 6:
         error_messages.append(f"Panjang string tidak sesuai. Input: '{rain_3hours_val}' (Panjang: {len(rain_3hours_val)}), Panjang sandi harus 5 karakter")
 
     if len(rain_3hours_val) == 5:
         rain_3hours_code = rain_3hours_val[0]
         R = int(rain_3hours_val[1:4])
         Tr = rain_3hours_val[-1]
-
-        # Cek kesesuaian karakter
         if rain_3hours_code != "6":
             error_messages.append(f"Sandi pengenal tidak sesuai. Input: '{rain_3hours_code}', Sandi pengenal seharusnya: '6'")
         if not (0 <= R <= 999):
             error_messages.append(f"Nilai hujan 3 jam mungkin tidak sesuai. Masukkan nilai antara 0-999. Input: '{R}'")
         if not (Tr == "7"):
             error_messages.append(f"Nilai Tr tidak sesuai. Input: '{Tr}'. Nilai Tr seharusnya: '7'.")
-
         if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan nilai integer
-            return ["Hujan 3 jam", rain_3hours_val, ""]
+            return ["Hujan 3 Jam", rain_3hours_val, ""]
 
+    if len(rain_3hours_val) == 6:
+        rain_3hours_code = rain_3hours_val[0]
+        R = int(rain_3hours_val[1:4])
+        Tr = rain_3hours_val[4]
+        eq_sign = rain_3hours_val[5]
+        if rain_3hours_code != "6":
+            error_messages.append(f"Sandi pengenal tidak sesuai. Input: '{rain_3hours_code}', Sandi pengenal seharusnya: '6'")
+        if not (0 <= R <= 999):
+            error_messages.append(f"Nilai hujan 3 jam mungkin tidak sesuai. Masukkan nilai antara 0-999. Input: '{R}'")
+        if not (Tr == "7"):
+            error_messages.append(f"Nilai Tr tidak sesuai. Input: '{Tr}'. Nilai Tr seharusnya: '7'.")
+        if not (eq_sign == "="):
+            error_messages.append("Karakter terakhir sandi harus '='")
+        if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan nilai integer
+            return ["Hujan 3 Jam", rain_3hours_val, ""] 
+    
     if error_messages:
-        return ["Hujan 3 jam", rain_3hours_val, ", ".join(error_messages)]   # Kembalikan daftar pesan kesalahan
+        return ["Hujan 3 Jam", rain_3hours_val, ", ".join(error_messages)]   # Kembalikan daftar pesan kesalahan
 
     return "Nilai hujan 3 jam tidak sesuai."
 
+# 8-N-C-h-h
 def cloud_1(cloud_1_val):
     cloud_1_val = str(cloud_1_val)
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
 
-    if len(cloud_1_val) != 5:
+    if len(cloud_1_val) != 5 and len(cloud_1_val) != 6:
         error_messages.append(f"Panjang string tidak sesuai. Input: '{cloud_1_val}' (Panjang: {len(cloud_1_val)}), Panjang sandi harus 5 karakter")
 
     if len(cloud_1_val) == 5:
@@ -768,7 +766,6 @@ def cloud_1(cloud_1_val):
       Ns = cloud_1_val[1]  # Ns: bagian langit yang tertutup oleh jenis awan tertentu
       C = int(cloud_1_val[2])   # C: Jenis Awan (sandi: 0-9)
       hs = int(cloud_1_val[3:]) # hs: Tinggi awan
-
       # Cek kesesuaian karakter
       if cloud_1_val[0] != '8':
           error_messages.append(f"Pengenal sandi awan tidak sesuai. Input: '{cloud_1_val[0]}', Harusnya: '8'")
@@ -778,15 +775,33 @@ def cloud_1(cloud_1_val):
           error_messages.append(f"Kode jenis awan (C) tidak sesuai. Masukkan nilai antara 0-9. Input: '{C}'")
       if not (0 <= hs <= 99):
           error_messages.append(f"Nilai tinggi awan (hs) tidak sesuai. Input: '{hs}'")
-
       if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan nilai integer
-          return ["Awan Lapisan Pertama.", cloud_1_val, ""]
+          return ["Awan Lapisan Pertama", cloud_1_val, ""]
 
+    if len(cloud_1_val) == 6:
+      cloud_1_code = cloud_1_val[0] # Kode pengenal kode awan sandi awan 1
+      Ns = cloud_1_val[1]  # Ns: bagian langit yang tertutup oleh jenis awan tertentu
+      C = int(cloud_1_val[2])   # C: Jenis Awan (sandi: 0-9)
+      hs = int(cloud_1_val[3:5]) # hs: Tinggi awan
+      eq_sign = cloud_1_val[5]
+      # Cek kesesuaian karakter
+      if cloud_1_val[0] != '8':
+          error_messages.append(f"Pengenal sandi awan tidak sesuai. Input: '{cloud_1_val[0]}', Harusnya: '8'")
+      if not (Ns in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '/']):
+          error_messages.append(f"Jumlah oktas Ns tidak sesuai. Masukkan nilai antara 0-8, 9, atau /. Input: '{Ns}'")
+      if not (0 <= C <= 9):
+          error_messages.append(f"Kode jenis awan (C) tidak sesuai. Masukkan nilai antara 0-9. Input: '{C}'")
+      if not (0 <= hs <= 99):
+          error_messages.append(f"Nilai tinggi awan (hs) tidak sesuai. Input: '{hs}'")
+      if not (eq_sign == "="):
+          error_messages.append("Karakter terakhir sandi harus '='")
+    
     if error_messages:
-        return ["Awan Lapisan Pertama.", cloud_1_val, ", ".join(error_messages)]  # Kembalikan daftar pesan kesalahan
+        return ["Awan Lapisan Pertama", cloud_1_val, ", ".join(error_messages)]  # Kembalikan daftar pesan kesalahan
 
     return "Sandi awan pertama tidak sesuai."
 
+#8-N-C-h3-h3
 def cloud_2(cloud_2_val):
     cloud_2_val = str(cloud_2_val)
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
@@ -799,7 +814,6 @@ def cloud_2(cloud_2_val):
       Ns = cloud_2_val[1]  # Ns: bagian langit yang tertutup oleh jenis awan tertentu
       C = int(cloud_2_val[2])   # C: Jenis Awan (sandi: 0-9)
       hs = int(cloud_2_val[3:]) # hs: Tinggi awan
-
       # Cek kesesuaian karakter
       if cloud_2_val[0] != '8':
           error_messages.append(f"Pengenal sandi awan tidak sesuai. Input: '{cloud_2_val[0]}', Harusnya: '8'")
@@ -809,20 +823,40 @@ def cloud_2(cloud_2_val):
           error_messages.append(f"Kode jenis awan (C) tidak sesuai. Masukkan nilai antara 0-9. Input: '{C}'")
       if not (0 <= hs <= 99):
           error_messages.append(f"Nilai tinggi awan (hs) tidak sesuai. Input: '{hs}'")
-
       if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan nilai integer
           return ["Awan Lapisan Kedua", cloud_2_val, ""]
 
+    if len(cloud_2_val) == 6:
+      cloud_2_code = cloud_2_val[0] # Kode pengenal kode awan sandi awan 2
+      Ns = cloud_2_val[1]  # Ns: bagian langit yang tertutup oleh jenis awan tertentu
+      C = int(cloud_2_val[2])   # C: Jenis Awan (sandi: 0-9)
+      hs = int(cloud_2_val[3:5]) # hs: Tinggi awan
+      eq_sign = cloud_2_val[5]
+      # Cek kesesuaian karakter
+      if cloud_2_val[0] != '8':
+          error_messages.append(f"Pengenal sandi awan tidak sesuai. Input: '{cloud_2_val[0]}', Harusnya: '8'")
+      if not (Ns in ['3', '4', '5', '6', '7', '8', '9', '/']):
+          error_messages.append(f"Jumlah oktas Ns lapisan kedua tidak sesuai. Masukkan nilai antara 3-8, 9, atau /. Input: '{Ns}'")
+      if not (0 <= C <= 9):
+          error_messages.append(f"Kode jenis awan (C) tidak sesuai. Masukkan nilai antara 0-9. Input: '{C}'")
+      if not (0 <= hs <= 99):
+          error_messages.append(f"Nilai tinggi awan (hs) tidak sesuai. Input: '{hs}'")
+      if not (eq_sign == "="):
+            error_messages.append("Karakter terakhir sandi harus '='")
+      if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan nilai integer
+          return ["Awan Lapisan Kedua", cloud_2_val, ""]
+    
     if error_messages:
         return ["Awan Lapisan Kedua", cloud_2_val, ", ".join(error_messages)]  # Kembalikan daftar pesan kesalahan
 
     return "Sandi awan kedua tidak sesuai."
 
+# 8-N-C-h3-h3
 def cloud_3(cloud_3_val):
     cloud_3_val = str(cloud_3_val)
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
 
-    if len(cloud_3_val) != 5:
+    if len(cloud_3_val) != 5 and len(cloud_3_val) != 6:
         error_messages.append(f"Panjang string tidak sesuai. Input: '{cloud_3_val}' (Panjang: {len(cloud_3_val)}), Panjang sandi harus 5 karakter")
 
     if len(cloud_3_val) == 5:
@@ -830,7 +864,6 @@ def cloud_3(cloud_3_val):
       Ns = cloud_3_val[1]  # Ns: bagian langit yang tertutup oleh jenis awan tertentu
       C = int(cloud_3_val[2])   # C: Jenis Awan (sandi: 0-9)
       hs = int(cloud_3_val[3:]) # hs: Tinggi awan
-
       # Cek kesesuaian karakter
       if cloud_3_val[0] != '8':
           error_messages.append(f"Pengenal sandi awan tidak sesuai. Input: '{cloud_3_val[0]}', Harusnya: '8'")
@@ -840,12 +873,31 @@ def cloud_3(cloud_3_val):
           error_messages.append(f"Kode jenis awan (C) tidak sesuai. Masukkan nilai antara 0-9. Input: '{C}'")
       if not (0 <= hs <= 99):
           error_messages.append(f"Nilai tinggi awan (hs) tidak sesuai. Input: '{hs}'")
-
       if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan nilai integer
-          return ["Awan Lapisan Ketiga.", cloud_3_val, ""]
+          return ["Awan Lapisan Ketiga", cloud_3_val, ""]
 
+    if len(cloud_3_val) == 6:
+      cloud_3_code = cloud_3_val[0] # Kode pengenal kode awan sandi awan 3
+      Ns = cloud_3_val[1]  # Ns: bagian langit yang tertutup oleh jenis awan tertentu
+      C = int(cloud_3_val[2])   # C: Jenis Awan (sandi: 0-9)
+      hs = int(cloud_3_val[3:5]) # hs: Tinggi awan
+      eq_sign = cloud_3_val[5]
+      # Cek kesesuaian karakter
+      if cloud_3_val[0] != '8':
+          error_messages.append(f"Pengenal sandi awan tidak sesuai. Input: '{cloud_3_val[0]}', Harusnya: '8'")
+      if not (Ns in ['5', '6', '7', '8', '9', '/']):
+          error_messages.append(f"Jumlah oktas Ns lapisan ketiga tidak sesuai. Masukkan nilai antara 5-8, 9, atau /. Input: '{Ns}'")
+      if not (0 <= C <= 9):
+          error_messages.append(f"Kode jenis awan (C) tidak sesuai. Masukkan nilai antara 0-9. Input: '{C}'")
+      if not (0 <= hs <= 99):
+          error_messages.append(f"Nilai tinggi awan (hs) tidak sesuai. Input: '{hs}'")
+      if not (eq_sign == "="):
+            error_messages.append("Karakter terakhir sandi harus '='")
+      if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan nilai 
+          return ["Awan Lapisan Ketiga", cloud_3_val, ""]
+          
     if error_messages:
-        return ["Awan Lapisan Ketiga.", cloud_3_val, ", ".join(error_messages)]  # Kembalikan daftar pesan kesalahan
+        return ["Awan Lapisan Ketiga", cloud_3_val, ", ".join(error_messages)]  # Kembalikan daftar pesan kesalahan
 
     return "Sandi awan ketiga tidak sesuai."
 
@@ -864,19 +916,18 @@ def cloud_section3(values):
     elif len(cloud_list) == 1:
         return [cloud_1(cloud_list[0])]
 
-
+# 80-C-h3-h3
 def convective_1(convective_3_val):
     convective_3_val = str(convective_3_val)
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
 
-    if len(convective_3_val) != 5:
-        error_messages.append(f"Panjang string tidak sesuai. Input: '{convective_3_val}' (Panjang: {len(convective_3_val)}), Panjang sandi harus 5 karakter")
+    if len(convective_3_val) != 5 and len(convective_3_val) != 6:
+        error_messages.append(f"Panjang string tidak sesuai. Input: '{convective_3_val}' (Panjang: {len(convective_3_val)}), Panjang sandi harus 5 karakter.")
 
     if len(convective_3_val) == 5:
         convective_3_code = convective_3_val[0:2]  # Kode pengenal sandi awan konvektif seksi 3
         C = convective_3_val[2]  # C: Jenis Awan (sandi: 0-9)
         hs = int(convective_3_val[3:])  # hs: Tinggi awan
-
         # Cek kesesuaian karakter
         if not (convective_3_code == "80"):
             error_messages.append("Awan konvektif harus jenis Cumulus (8) atau Cumulonimbus (9).")
@@ -884,7 +935,23 @@ def convective_1(convective_3_val):
             error_messages.append(f"Kode jenis awan (C) tidak sesuai. Masukkan nilai antara 8-9. Input: '{C}'")
         if not (0 <= hs <= 99):
             error_messages.append(f"Nilai tinggi awan (hs) tidak sesuai. Input: '{hs}'")
+        if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan sandi awan
+            return ["Konvektif Seksi 3", convective_3_val, ""]
 
+    if len(convective_3_val) == 6:
+        convective_3_code = convective_3_val[0:2]  # Kode pengenal sandi awan konvektif seksi 3
+        C = convective_3_val[2]  # C: Jenis Awan (sandi: 0-9)
+        hs = int(convective_3_val[3:4])  # hs: Tinggi awan
+        eq_sign = convective_3_val[5]
+        # Cek kesesuaian karakter
+        if not (convective_3_code == "80"):
+            error_messages.append("Awan konvektif harus jenis Cumulus (8) atau Cumulonimbus (9).")
+        if not (C in ['8', '9']):
+            error_messages.append(f"Kode jenis awan (C) tidak sesuai. Masukkan nilai antara 8-9. Input: '{C}'")
+        if not (0 <= hs <= 99):
+            error_messages.append(f"Nilai tinggi awan (hs) tidak sesuai. Input: '{hs}'")
+        if not (eq_sign == "="):
+            error_messages.append("Karakter terakhir sandi harus '='")
         if not error_messages:  # Jika tidak ada pesan kesalahan, kembalikan sandi awan
             return ["Konvektif Seksi 3", convective_3_val, ""]
 
