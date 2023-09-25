@@ -682,7 +682,7 @@ def pressure_changes(pressure_changes_val):
     pressure_changes_val = str(pressure_changes_val)
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
 
-    if len(pressure_changes_val) != 5 and len(pressure_changes_val) != 5:
+    if len(pressure_changes_val) != 5 and len(pressure_changes_val) != 6:
         error_messages.append(f"Panjang string tidak sesuai. Input: '{pressure_changes_val}' (Panjang: {len(pressure_changes_val)}), Panjang sandi harus 5 karakter")
 
     if len(pressure_changes_val) == 5:
