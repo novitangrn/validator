@@ -269,7 +269,7 @@ def main_00UTC(synop_code):
     # prepare input sandi
     synop_code = str(synop_code)
     parts = synop_code.split()
-    first_list, second_list, third_list = input_sandi(parts)
+    first_list, second_list, third_list = input_sandi(parts, df_kode)
 
     # process functions
     processed_functions = set()
