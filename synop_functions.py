@@ -1,3 +1,5 @@
+import pandas as pd
+
 # SMID53
 def heading1(head):
     head = str(head)
