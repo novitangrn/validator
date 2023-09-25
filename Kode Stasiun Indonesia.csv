@@ -1,0 +1,131 @@
+﻿WMO-Station ID; StationName; Country
+96001;          Sabang/Sumatra; Indonesia
+96009;          Lhokseumawe/Sumatra; Indonesia
+96011;          Banda Aceh/Sumatra; Indonesia
+96015;          Meulaboh Airport/Sumatra; Indonesia
+96033;          Belawan/Sumatra; Indonesia
+96035;          Medan (Kuala Namu)/Sumatra; Indonesia
+96073;          Sibolga (Pinangsori)/Sumatra; Indonesia
+96075;          Gunung Sitoli (Binaka)/Nias; Indonesia
+96087;          Batam Airport/Sumatra; Indonesia
+96091;          Tanjung Pingang/Riau-Arch.; Indonesia
+96109;          Pakanbaru/Sumatra; Indonesia
+96145;          Tarempa/Anabas-Inseln; Indonesia
+96147;          Ranai; Indonesia
+96163;          Padang/Sumatra; Indonesia
+96171;          Rengat/Sumatra; Indonesia
+96179;          Singkep (Dabo); Indonesia
+96191;          Sei Duren Jambi; Indonesia
+96195;          Jambi Airp./Sumatra; Indonesia
+96207;          Kerinci Airp./Sumatra; Indonesia
+96221;          Palembang/Sumatra; Indonesia
+96223;          Kenten Palembang; Indonesia
+96237;          Pangkal Pinang/Bangka; Indonesia
+96249;          Tanjung Pandan Airp./Belitung; Indonesia
+96253;          Bengkulu/Sumatra; Indonesia
+96295;          Tanjung Karang/Sumatra; Indonesia
+96503;          Nunukan; Indonesia
+96505;          Longbawan/Kalimantan; Indonesia
+96509;          Tarakan/Kalimantan; Indonesia
+96525;          Tanjung Selor/Kalimantan; Indonesia
+96529;          Tanjung Redep/Kalimantan; Indonesia
+96535;          Paloh/Kalimantan; Indonesia
+96559;          Sintang/Kalimantan; Indonesia
+96565;          Putusibau/Pagsuma; Indonesia
+96581;          Pontianak/Kalimantan; Indonesia
+96583;          Slantan Pontianak; Indonesia
+96585;          Stamar Pontianak; Indonesia
+96595;          Muara Teweh/Kalimantan; Indonesia
+96607;          Samarinda/Kalimantan; Indonesia
+96615;          Ketapang/Kalimantan; Indonesia
+96633;          Balikpapan/Kalimantan; Indonesia
+96645;          Pangkalan Bun/Kalimantan; Indonesia
+96651;          Sampit Haji Hasan; Indonesia
+96655;          Palangkaraya/Kalimantan; Indonesia
+96685;          Banjarmasin (Airport)/Kalimantan; Indonesia
+96695;          Kotabaru/Kalimantan; Indonesia
+96737;          Serang/Java; Indonesia
+96739;          Curug/Java; Indonesia
+96741;          Jakarta-Tanjung/Java; Indonesia
+96743;          Jakarta-Kemay./Java; Indonesia
+96745;          Jakarta (Observ.)/Java; Indonesia
+96747;          Jakarta-Halim/Java; Indonesia
+96749;          Jakarta Airport/Java; Indonesia
+96751;          Bogor-Citeko/Java; Indonesia
+96753;          Bogor-Dermaga/Java; Indonesia
+96755;          Bogor-Atang S./Java; Indonesia
+96773;          Kalijati/Java; Indonesia
+96781;          Bandung-Husein/Java; Indonesia
+96783;          Bandung/Java; Indonesia
+96791;          Jatiwangi/Java; Indonesia
+96797;          Tegal/Java; Indonesia
+96805;          Cilacap/Java; Indonesia
+96837;          Semarang/Java; Indonesia
+96839;          Semarang Airport/Java; Indonesia
+96845;          Surakarta/Java; Indonesia
+96853;          Jogyakarta/Java; Indonesia
+96925;          Sangkapura/Bewean; Indonesia
+96933;          Surabaya-Perak I/Java; Indonesia
+96935;          Surabaya-Juanda/Java; Indonesia
+96937;          Surabaya-Perak II/Java; Indonesia
+96973;          Kalianget/Madura Insel; Indonesia
+96987;          Banyuwangi/Java; Indonesia
+97008;          Naha (Tahuna)/Sulawesi; Indonesia
+97010;          Ulu Siau; Indonesia
+97012;          Kayuwatu/Sulawesi; Indonesia
+97014;          Manado Airport/Sulawesi; Indonesia
+97016;          Bitung/Sulawesi; Indonesia
+97028;          Toli-Toli/Sulawesi; Indonesia
+97048;          Gorontalo/Sulawesi; Indonesia
+97072;          Palu Airport/Sulawesi; Indonesia
+97086;          Luwuk/Sulawesi; Indonesia
+97096;          Poso Airport/Sulawesi; Indonesia
+97120;          Majene/Sulawesi; Indonesia
+97126;          Masamba/Sulawesi; Indonesia
+97142;          Kolaka/Pomala; Indonesia
+97144;          Kendari (Port); Indonesia
+97146;          Kendari Airport/Sulawesi; Indonesia
+97180;          Makassar Airport/Sulawesi; Indonesia
+97182;          Makassar (Paotere)/Sulawesi; Indonesia
+97184;          Danakukang Ujun/Sulawesi; Indonesia
+97192;          Bau-Bau Airport/Sulawesi; Indonesia
+97230;          Denpasar/Sunda-Inseln; Indonesia
+97240;          Praya (Lombok Airport); Indonesia
+97260;          Sumbawa Besar/Sunda-Ins.; Indonesia
+97270;          Bima/M. Salahuddin Airport; Indonesia
+97282;          Stamet Komodo Labuhan Bajo; Indonesia
+97284;          Ruteng Satar Tacik; Indonesia
+97300;          Maumere/Sunda-Inseln; Indonesia
+97310;          Larantuka/Sunda-Inseln; Indonesia
+97320;          Mali/Alor Island; Indonesia
+97340;          Waingapu/Sunda-Inseln; Indonesia
+97372;          Kupang (El Tari Airport)/Timor; Indonesia
+97374;          Atambua Haliwen; Indonesia
+97378;          Baa Airport/Rote Island; Indonesia
+97380;          Sabu/Sunda-Inseln; Indonesia
+97406;          Galela/Molukken; Indonesia
+97430;          Ternate/Molukken; Indonesia
+97460;          Labuha/Molukken; Indonesia
+97502;          Sorong/West Papua; Indonesia
+97530;          Manokwari/West Papua; Indonesia
+97560;          Biak/West Papua; Indonesia
+97570;          Serui/West Papua; Indonesia
+97580;          Sarmi / Irian Yaya; Indonesia
+97600;          Sanana/Molukken; Indonesia
+97630;          Fak-Fak/West Papua; Indonesia
+97682;          Nabire/West Papua; Indonesia
+97686;          Wamena/West Papua; Indonesia
+97690;          Jayapura Airp./West Papua; Indonesia
+97698;          Jayapura/West Papua; Indonesia
+97700;          Namlea/Molukken; Indonesia
+97722;          Amahai/Molukken; Indonesia
+97724;          Ambon (Pattimura Airp)/Molukken; Indonesia
+97748;          Geser (Seram Isl.)/Molukken; Indonesia
+97760;          Kaimana Airport/West Papua; Indonesia
+97780;          Enarotali/West Papua; Indonesia
+97790;          Neira Airport/Banda Islands; Indonesia
+97796;          Timika/ West Papua; Indonesia
+97810;          Tual Airport/Molukken; Indonesia
+97876;          Tanah Merah/West Papua; Indonesia
+97900;          Saumlaki/Molukken; Indonesia
+97980;          Merauke/West Papua; Indonesia
