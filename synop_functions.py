@@ -87,6 +87,7 @@ def anemo_time(an_time):
 
 # I-I-i-i-i
 def sandi_stamet(IIiii):
+    import pandas as pd
     IIiii = str(IIiii)
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
     kode_stamet = "https://raw.githubusercontent.com/novitangrn/dataset/main/Kode%20Stasiun%20Indonesia.csv"
