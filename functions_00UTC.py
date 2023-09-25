@@ -1,15 +1,20 @@
 from synop_functions import *
 import pandas as pd
 
-def input_sandi(parts):
+kode_stamet = "https://raw.githubusercontent.com/novitangrn/dataset/main/Kode%20Stasiun%20Indonesia.csv"
+df_kode = pd.read_csv(kode_stamet, sep=';')
+
+def input_sandi(parts, df_kode):
     section1_list = []
     section2_list = []
     section3_list = []
+    wmo_code_list = df_kode["WMO-Station ID"].astype(str).tolist()
+    
     try:
-        index_1 = parts.index('96935')  # Mencari indeks sandi pertama '96935'
+        index_1 = next(i for i, part in enumerate(parts) if part in wmo_code_list) # Mencari nilai yang sesuai dengan nilai dalam list untuk dijadikan indeks_1
         index_2 = parts.index('333')  # Mencari indeks sandi kedua '333'
-    except ValueError:
-        raise ValueError("Masukkan input sandi synop yang valid")
+    except (ValueError, StopIteration):
+        raise ValueError("Sandi stasiun tidak valid")
 
     section1_list = parts[:index_1+1] 
     section2_list = parts[index_1 + 1:index_2]  
