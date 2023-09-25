@@ -809,7 +809,7 @@ def cloud_2(cloud_2_val):
     cloud_2_val = str(cloud_2_val)
     error_messages = []  # Daftar untuk menyimpan pesan kesalahan
 
-    if len(cloud_2_val) != 5:
+    if len(cloud_2_val) != 5 and len(cloud_2_val) != 6:
         error_messages.append(f"Panjang string tidak sesuai. Input: '{cloud_2_val}' (Panjang: {len(cloud_2_val)}), Panjang sandi harus 5 karakter")
 
     if len(cloud_2_val) == 5:
