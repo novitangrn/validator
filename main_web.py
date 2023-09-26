@@ -34,6 +34,9 @@ def main_st():
     
             # check time to run the corresponding functions
             selected_hour = check_time(heading_list)
+
+            # Display selected hour
+            st.markdown(f"<h3>Jam yang terdeteksi: {selected_hour}</h3>", unsafe_allow_html=True)
     
             # 00UTC
             if selected_hour == "00":
