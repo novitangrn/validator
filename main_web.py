@@ -5,6 +5,7 @@ import streamlit as st
 import pandas as pd
 import re
 
+# Main Streamlit
 def main_st():
     st.set_page_config(layout="wide")
     img = st.image('login2.png', width=180)
@@ -12,11 +13,19 @@ def main_st():
     #st.image('login2.png',use_column_width=True)
     
     # Dropdown untuk memilih jam
-    selected_hour = st.selectbox("Pilih Jam", ["--Pilih Jam--", "00.00", "01.00", "02.00"])  # Tambahkan jam-jam lain yang diinginkan
+    # selected_hour = st.selectbox("Pilih Jam", ["--Pilih Jam--", "00.00", "01.00", "02.00"])  # Tambahkan jam-jam lain yang diinginkan
 
     # Input teks dari pengguna
     synop_code = st.text_area("Masukkan sandi synop", height=100)
-   
+    
+    # prepare sandi
+    synop_code = str(synop_code)
+    parts = synop_code.split()
+    heading_list, section_0_list, section_1_list, section_3_list = input_sandi(parts, df_kode)
+
+    # check time to run the corresponding functions
+    selected_hour = check_time(parts)
+    
     # process button
     if st.button("Proses"):
         # None input
@@ -24,7 +33,7 @@ def main_st():
             st.error("Masukkan input sandi synop yang valid")
         else:
             # 00UTC
-            if selected_hour == "00.00":
+            if selected_hour == "00":
                 try:
                     # Memeriksa apakah part terakhir dari keseluruhan sandi mengandung tanda "="
                     pattern = r'=\s*$'  # Pola ekspresi reguler untuk mencocokkan tanda "=" di akhir teks
