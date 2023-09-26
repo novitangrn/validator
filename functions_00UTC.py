@@ -6,7 +6,8 @@ df_kode = pd.read_csv(kode_stamet, sep=';')
 
 
 # Break input into parts
-def input_sandi(parts, df_kode):
+def input_sandi(synop_code, df_kode):
+    parts = synop_code.split()
     section_heading_list = []
     section_0_list = []
     section_1_list = []
@@ -29,7 +30,7 @@ def input_sandi(parts, df_kode):
     section_3_list = parts[index_2:]  
 
     return section_heading_list, section_0_list, section_1_list, section_3_list
-
+    
 
 # Check Time Inputted
 def check_time(parts):    
