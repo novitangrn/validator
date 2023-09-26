@@ -41,10 +41,10 @@ def main_st():
                     # Memeriksa apakah part terakhir dari keseluruhan sandi mengandung tanda "="
                     pattern = r'=\s*$'  # Pola ekspresi reguler untuk mencocokkan tanda "=" di akhir teks
                     if re.search(pattern, synop_code):
-                        df_seksi_0, df_seksi_1, df_seksi_3 = main_00UTC(synop_code)
+                        df_seksi_0, df_seksi_1, df_seksi_3 = main_00UTC(heading_list, section_0_list, section_1_list, section_3_list)
                     else:
                         st.warning("Part terakhir dari sandi synop tidak memiliki tanda '='")
-                        df_seksi_0, df_seksi_1, df_seksi_3 = main_00UTC(synop_code)
+                        df_seksi_0, df_seksi_1, df_seksi_3 = main_00UTC(heading_list, section_0_list, section_1_list, section_3_list)
                 except ValueError:
                     st.error("Masukkan sandi synop yang valid")
             # elif selected_hour == "01.00":
