@@ -24,7 +24,7 @@ def main_st():
     heading_list, section_0_list, section_1_list, section_3_list = input_sandi(parts, df_kode)
 
     # check time to run the corresponding functions
-    selected_hour = check_time(parts)
+    selected_hour = check_time(heading_list)
     
     # process button
     if st.button("Proses"):
