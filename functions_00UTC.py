@@ -306,8 +306,8 @@ def main_00UTC(heading_list, section_0_list, section_1_list, section_3_list):
                         pressure_changes, rain_3hours, cloud_1, cloud_2, cloud_3, convective_1]
 
     # process functions
-    processed_functions = set()
-    unprocessed_parts = parts[:]
+    #processed_functions = set()
+    #unprocessed_parts = parts[:]
     results_heading = report_heading(function_heading, heading_list)
     results_seksi_0 = section_0(function_seksi_0, section_0_list)
     results_seksi_1 = section_1_00UTC(function_seksi_1, section_1_list)
