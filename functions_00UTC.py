@@ -4,54 +4,86 @@ import pandas as pd
 kode_stamet = "https://raw.githubusercontent.com/novitangrn/dataset/main/Kode%20Stasiun%20Indonesia.csv"
 df_kode = pd.read_csv(kode_stamet, sep=';')
 
+
+# Break input into parts
 def input_sandi(parts, df_kode):
-    section1_list = []
-    section2_list = []
-    section3_list = []
+    section_heading_list = []
+    section_0_list = []
+    section_1_list = []
+    section_3_list = []
     wmo_code_list = df_kode["WMO-Station ID"].astype(str).tolist()
-    
+
     try:
-        index_1 = next(i for i, part in enumerate(parts) if part in wmo_code_list) # Mencari nilai yang sesuai dengan nilai dalam list untuk dijadikan indeks_1
+        index_1 = next(i for i, part in enumerate(parts) if part in wmo_code_list)  # Mencari nilai yang sesuai dengan nilai dalam list untuk dijadikan indeks_1
         index_2 = parts.index('333')  # Mencari indeks sandi kedua '333'
     except (ValueError, StopIteration):
-        raise ValueError("Sandi stasiun tidak valid")
+        raise ValueError("Sandi synop tidak valid.")
 
-    section1_list = parts[:index_1+1] 
-    section2_list = parts[index_1 + 1:index_2]  
-    section3_list = parts[index_2:]  
+    for i, part in enumerate(parts):
+        if part.isdigit() and len(part) == 6:
+            section_heading_list = parts[:i+1]
+            break
 
-    return section1_list, section2_list, section3_list
+    section_0_list = parts[len(section_heading_list) : index_1 + 1]  
+    section_1_list = parts[index_1+1 : index_2]  
+    section_3_list = parts[index_2:]  
 
-def section_0(functions, parts):
+    return section_heading_list, section_0_list, section_1_list, section_3_list
+
+
+# Check Time Inputted
+def check_time(parts):    
+    for i, part in enumerate(parts):
+        if part.isdigit() and len(part) == 6:
+          date = part[0:2]
+          hour = part[2:4]
+          minute = part[4:6]
+          return hour
+
+# Heading Laporan
+def report_heading(functions, parts):
     outputs = []
-    function0_left = functions.copy()
+    function_heading_left = functions.copy()
     unprocessed_parts = parts[:]
 
-    for part in parts[:3]:
+    for part in parts[:]:
         # Heading sandi
         if any(char in ["S", "M", "I", "D"] for char in list(part)):
-          if heading1 in function0_left and part in unprocessed_parts:
+          if heading1 in function_heading_left and part in unprocessed_parts:
             output = heading1(part)
             outputs.insert(functions.index(heading1)+1, output)
-            function0_left.remove(heading1)
+            function_heading_left.remove(heading1)
             #processed_functions.add(heading1)
             unprocessed_parts.remove(part)
         # Location
         if any(char in ["W", "R"] for char in list(part)):
           output = location(part)
           outputs.insert(functions.index(location)+1, output)
-          function0_left.remove(location)
+          function_heading_left.remove(location)
           #processed_functions.add(location)
           unprocessed_parts.remove(part)
         # Time
         if part.isdigit() and len(part) == 6:
           output = time(part)
           outputs.insert(functions.index(time)+1, output)
-          function0_left.remove(time)
+          function_heading_left.remove(time)
           #processed_functions.add(time)
           unprocessed_parts.remove(part)
 
-    for part in parts[2:]:
+    for func in function_heading_left:
+      out = func("")
+      output = [out[0], "", "Sandi harus diisi"]
+      outputs.insert(functions.index(func), output)
+
+    return outputs
+
+# Section 0
+def section_0(functions, parts):
+    outputs = []
+    function0_left = functions.copy()
+    unprocessed_parts = parts[:]
+
+    for part in parts[:]:
         # Mi-Mi-Mj-Mj
         if any(char in ["A", "X"] for char in list(part)):
           output = synop(part)
@@ -75,12 +107,14 @@ def section_0(functions, parts):
           unprocessed_parts.remove(part)
 
     for func in function0_left:
-      out = func("")
-      output = [out[0], "", "Sandi harus diisi"]
-      outputs.insert(functions.index(func), output)
+        out = func("")
+        output = [out[0], "", "Sandi harus diisi"]
+        outputs.insert(functions.index(func), output)
 
     return outputs
 
+
+# Section 1
 def section_1_00UTC(functions, parts):
     outputs = []
     function1_left = functions.copy()
@@ -160,6 +194,8 @@ def section_1_00UTC(functions, parts):
 
     return outputs
 
+
+# Section 3
 def section_3_00UTC(functions, parts):
     # section 3 with 1 digit key
     function_mapping_seksi3 = {
@@ -246,45 +282,45 @@ def section_3_00UTC(functions, parts):
     outputs = list(filter(lambda x: x is not None, outputs))
     return outputs
 
+
+# Create Dataframe
 def create_dataframe(output):
     pd.set_option('display.max_colwidth', 500)
     df = pd.DataFrame(output, columns=['Nama Fungsi', 'Input', 'Output'])
     return df
 
-def main_00UTC(synop_code):
 
+# Main Function
+def main_00UTC(synop_code):
     # prepare functions
     functions = [heading1, location, time, synop, anemo_time, sandi_stamet,
                 sandi_hujan, wind, temp, dew_point, qfe, qff, pressure, rain_24, weather_con, clouds,
                 seksi_3, max_temp, min_temp, evaporation, sun_radiation, cloud_direction, convective_clouds,
                 pressure_changes, rain_3hours, cloud_1, cloud_2, cloud_3, convective_1, isobar]
 
-
-    function_seksi_0 = [heading1, location, time, synop, anemo_time, sandi_stamet]
+    function_heading = [heading1, location, time]
+    function_seksi_0 = [synop, anemo_time, sandi_stamet]
     function_seksi_1 = [sandi_hujan, wind, wind_2, temp, dew_point, qfe, qff, isobar, pressure, rain_24, weather_con, clouds]
     function_seksi_3 = [seksi_3, max_temp, min_temp, evaporation, sun_radiation, cloud_direction, convective_clouds,
                         pressure_changes, rain_3hours, cloud_1, cloud_2, cloud_3, convective_1]
 
-
     # prepare input sandi
     synop_code = str(synop_code)
     parts = synop_code.split()
-    first_list, second_list, third_list = input_sandi(parts, df_kode)
+    heading_list, section_0_list, section_1_list, section_3_list = input_sandi(parts, df_kode)
 
     # process functions
     processed_functions = set()
     unprocessed_parts = parts[:]
-    results_seksi_0 = section_0(function_seksi_0, first_list)
-    results_seksi_1 = section_1_00UTC(function_seksi_1, second_list)
-    results_seksi_3 = section_3_00UTC(function_seksi_3, third_list)
-
-    # create dataframe
-    #df = pd.concat([create_dataframe(results_seksi_0),
-                    #create_dataframe(results_seksi_1),
-                    #create_dataframe(results_seksi_3)], ignore_index=True)
+    results_heading = report_heading(function_heading, heading_list)
+    results_seksi_0 = section_0(function_seksi_0, section_0_list)
+    results_seksi_1 = section_1_00UTC(function_seksi_1, section_1_list)
+    results_seksi_3 = section_3_00UTC(function_seksi_3, section_3_list)
 
     # create data frames
-    df_seksi_0 = create_dataframe(results_seksi_0)
+    df_heading = create_dataframe(results_heading)
+    df_0 = create_dataframe(results_seksi_0)
+    df_seksi_0 = pd.concat([df_heading, df_0], ignore_index=True)
     df_seksi_1 = create_dataframe(results_seksi_1)
     df_seksi_3 = create_dataframe(results_seksi_3)
 
