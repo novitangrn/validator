@@ -5,6 +5,7 @@ import streamlit as st
 import pandas as pd
 import re
 
+
 # Main Streamlit
 def main_st():
     st.set_page_config(layout="wide")
@@ -18,9 +19,10 @@ def main_st():
     # Input teks dari pengguna
     synop_code = st.text_area("Masukkan sandi synop", height=100)
     
-    # prepare sandi
-    parts = synop_code.split()
-    heading_list, section_0_list, section_1_list, section_3_list = input_sandi(parts, df_kode)
+    # prepare sandi  
+    kode_stamet = "https://raw.githubusercontent.com/novitangrn/dataset/main/Kode%20Stasiun%20Indonesia.csv"
+    df_kode = pd.read_csv(kode_stamet, sep=';')
+    heading_list, section_0_list, section_1_list, section_3_list = input_sandi(synop_code, df_kode)
 
     # check time to run the corresponding functions
     selected_hour = check_time(heading_list)
