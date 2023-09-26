@@ -36,7 +36,7 @@ def main_st():
             selected_hour = check_time(heading_list)
 
             # Display selected hour
-            st.write(f'<span style="color: blue; font-size: 24px;">Jam yang dipilih: {selected_hour}</span>', unsafe_allow_html=True)
+            st.write(f'<span style="color: darkblue; font-size: 24px;">Jam yang dipilih: {selected_hour}</span>', unsafe_allow_html=True)
             #st.markdown(f"<h3>Jam yang terdeteksi: {selected_hour}</h3>", unsafe_allow_html=True)
     
             # 00UTC
