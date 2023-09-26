@@ -292,7 +292,7 @@ def create_dataframe(output):
 
 
 # Main Function
-def main_00UTC(synop_code):
+def main_00UTC(heading_list, section_0_list, section_1_list, section_3_list):
     # prepare functions
     functions = [heading1, location, time, synop, anemo_time, sandi_stamet,
                 sandi_hujan, wind, temp, dew_point, qfe, qff, pressure, rain_24, weather_con, clouds,
@@ -304,11 +304,6 @@ def main_00UTC(synop_code):
     function_seksi_1 = [sandi_hujan, wind, wind_2, temp, dew_point, qfe, qff, isobar, pressure, rain_24, weather_con, clouds]
     function_seksi_3 = [seksi_3, max_temp, min_temp, evaporation, sun_radiation, cloud_direction, convective_clouds,
                         pressure_changes, rain_3hours, cloud_1, cloud_2, cloud_3, convective_1]
-
-    # prepare input sandi
-    synop_code = str(synop_code)
-    parts = synop_code.split()
-    heading_list, section_0_list, section_1_list, section_3_list = input_sandi(parts, df_kode)
 
     # process functions
     processed_functions = set()
