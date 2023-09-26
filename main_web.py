@@ -15,24 +15,26 @@ def main_st():
     
     # Dropdown untuk memilih jam
     # selected_hour = st.selectbox("Pilih Jam", ["--Pilih Jam--", "00.00", "01.00", "02.00"])  # Tambahkan jam-jam lain yang diinginkan
-
+    
     # Input teks dari pengguna
     synop_code = st.text_area("Masukkan sandi synop", height=100)
     
-    # prepare sandi  
-    kode_stamet = "https://raw.githubusercontent.com/novitangrn/dataset/main/Kode%20Stasiun%20Indonesia.csv"
-    df_kode = pd.read_csv(kode_stamet, sep=';')
-    heading_list, section_0_list, section_1_list, section_3_list = input_sandi(synop_code, df_kode)
-
-    # check time to run the corresponding functions
-    selected_hour = check_time(heading_list)
-    
-    # process button
+    # Process button
     if st.button("Proses"):
         # None input
         if not synop_code.strip():
             st.error("Masukkan input sandi synop yang valid")
         else:
+            # prepare sandi  
+            kode_stamet = "https://raw.githubusercontent.com/novitangrn/dataset/main/Kode%20Stasiun%20Indonesia.csv"
+            df_kode = pd.read_csv(kode_stamet, sep=';')
+            
+            # prepare sandi  
+            heading_list, section_0_list, section_1_list, section_3_list = input_sandi(synop_code, df_kode)
+    
+            # check time to run the corresponding functions
+            selected_hour = check_time(heading_list)
+    
             # 00UTC
             if selected_hour == "00":
                 try:
