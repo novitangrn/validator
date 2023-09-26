@@ -19,7 +19,6 @@ def main_st():
     synop_code = st.text_area("Masukkan sandi synop", height=100)
     
     # prepare sandi
-    synop_code = str(synop_code)
     parts = synop_code.split()
     heading_list, section_0_list, section_1_list, section_3_list = input_sandi(parts, df_kode)
 
