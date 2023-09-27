@@ -64,6 +64,9 @@ def main_st():
                 df_seksi_1['Output'].astype(bool).sum() == 0 and
                 df_seksi_3['Output'].astype(bool).sum() == 0):
                 st.success("Sandi synop sudah benar")
+                df_seksi_0['Sandi Benar'] = synop_code
+                df_seksi_1['Sandi Benar'] = synop_code
+                df_seksi_3['Sandi Benar'] = synop_code
                 st.markdown("<br>", unsafe_allow_html=True)  # Menambahkan baris kosong setelah pesan
             else:
                 st.warning("Sandi synop mengandung kesalahan")
